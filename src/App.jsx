@@ -29,7 +29,7 @@ function App() {
           <div key={index} className="shadow rounded-lg overflow-hidden flex flex-col hover:border hover:border-gray-500 hover:shadow-lg hover:scale-105 transition-transform duration-300">
             {/* Image */}
             <img
-              src="https://www.placehold.co/200x400"
+              src="https://www.placehold.co/300x200"
               alt={course.title}
               className="w-full h-44 object-cover"
             />
