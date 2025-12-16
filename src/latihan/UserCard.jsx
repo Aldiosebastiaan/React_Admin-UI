@@ -1,9 +1,10 @@
+/*
 import React, { useState } from "react";
 
 function UserCard(props) {
   const { title, body } = props;
   const [clicked, setClicked] = useState(false);
-
+/*
   return (
     <div
       className={`
@@ -14,17 +15,18 @@ function UserCard(props) {
         min-h-[260px] max-w-xs mx-auto
       `}
     >
-      {/* Title */}
+   
+      
       <h2 className="text-sm font-semibold text-gray-800 mb-2 leading-snug">
         {title}
       </h2>
 
-      {/* Body */}
+      
       <p className="text-gray-600 text-xs leading-relaxed mb-3 line-clamp-4 whitespace-pre-line">
         {body}
       </p>
 
-      {/* Tombol klik */}
+      
       <button
         className={`text-white py-1.5 px-3 rounded-md w-full transition-colors duration-200 text-sm font-medium
           ${clicked 
@@ -39,4 +41,7 @@ function UserCard(props) {
   );
 }
 
+
+/*
 export default UserCard;
+*/

@@ -1,3 +1,4 @@
+/* 
 const city = "Jakarta";
 const street = "Jl Kebon Jeruk";
 
@@ -23,3 +24,4 @@ export const getUsers = async () => {
     throw error;
   }
 };
+*/

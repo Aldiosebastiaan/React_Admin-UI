@@ -1,5 +1,5 @@
 
-
+/*
 import React, { useEffect, useState } from "react"; 
 import UserCard from "./UserCard";
 import { getUsers } from "./Services"; 
@@ -48,3 +48,5 @@ function Exercise() {
 }
 
 export default Exercise;
+
+*/
