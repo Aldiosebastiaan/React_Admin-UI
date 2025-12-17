@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import AuthLayout from "../components/Layouts/AuthLayout";
+import FormSignUp from "../components/Fragments/FormSignUp";
 
 function SignUp() {
-  return (
-    <div>SignUp</div>
-  )
+    return (
+        <AuthLayout>
+            <FormSignUp/>
+        </AuthLayout>
+    );
 }
 
-export default SignUp
+export default SignUp;

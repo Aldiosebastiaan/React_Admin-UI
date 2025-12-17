@@ -1,20 +1,33 @@
 import React from "react";
 import LabeledInput from "../Elements/LabeledInput";
-import CheckBox from "../Elements/CheckBox";
 import Button from "../Elements/Button";
 import { Link } from "react-router-dom";
 
-function FormSignIn() {
+function FormSignUp() {
     return (
         <>
+            {/* Title - Create an Account */}
+            <div className="text-center mb-8">
+                <h1 className="mt-8 text-2xl font-bold text-defaultBlack">Create an Account</h1>
+            </div>
+
             {/* form start */}
-            <div className="mt-16">
+            <div className="mt-8">
                 <form action="">
+                    <div className="mb-6">
+                        <LabeledInput
+                            label="Name"
+                            id="name"
+                            type="text"
+                            placeholder="Your full name"
+                            name="name"
+                        />
+                    </div>
                     <div className="mb-6">
                         <LabeledInput
                             label="Email Address"
                             id="email"
-                            type= "email"
+                            type="email"
                             placeholder="hello@example.com"
                             name="email"
                         />
@@ -23,40 +36,52 @@ function FormSignIn() {
                         <LabeledInput
                             label="Password"
                             id="password"
-                            type= "password"
+                            type="password"
                             placeholder="•••••••••••"
                             name="password"
                         />
                     </div>
-                    <div className="mb-3">
-                        <CheckBox
-                            label="Keep me signed in"
-                            id="status"
-                            type="checkbox"
-                            name="status"
-                        />
+                    
+                    {/* Terms and Conditions */}
+                    <div className="mb-6">
+                        <div className="flex items-start">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                name="terms"
+                                className="mt-1 mr-3"
+                            />
+                            <label htmlFor="terms" className="text-sm text-gray-02">
+                                By continuing, you agree to our{" "}
+                                <Link to="/terms" className="text-primary hover:underline">
+                                    terms of service
+                                </Link>
+                                .
+                            </label>
+                        </div>
                     </div>
-                    <Button>Login</Button>
+                    
+                    {/* Sign Up Button */}
+                    <Button className="w-full">Sign Up</Button>
                 </form>
             </div>
             {/* form end */}
-            {/* teks start */}
+
+            {/* Divider with text */}
             <div className="my-9 px-7 flex flex-col justify-center items-center text-xs text-gray-03">
                 <div className="border border-gray-05 w-full"></div>
                 <div className="px-2 bg-special-mainBg absolute">
-                    or sign in with
+                    or sign up with
                 </div>
             </div>
-            {/* teks end */}
-            {/* sign in with google start */}
+
+            {/* Google Sign Up Button */}
             <div className="mb-8">
-                <Button type="button" variant="secondary">
-                    <span className="h-12 flex items-center justify-center rounded-md text-sm w-full bg-gray-05 text-gray-01">
+                <Button type="button" variant="secondary" className="w-full">
+                    <span className="flex items-center justify-center py-3 rounded-md text-sm bg-white border border-gray-04 text-gray-01 hover:bg-gray-06">
                         <svg
-                            className="h-6 w-6 mr-2"
+                            className="h-5 w-5 mr-3"
                             xmlns="http://www.w3.org/2000/svg"
-                            width="800"
-                            height="800"
                             viewBox="-0.5 0 48 48"
                         >
                             <path
@@ -80,16 +105,16 @@ function FormSignIn() {
                     </span>
                 </Button>
             </div>
-            {/* sign in with google end */}
-            {/* link start */}
-                <div className="flex justify-center">
-                    <Link to="register" className="text-primary text-sm font-bold">
-                        Create an account
-                    </Link>
-                </div>
-            {/*link end */}
+
+            {/* Already have an account link */}
+            <div className="flex justify-center text-sm text-gray-01">
+                Already have an account?&nbsp;
+                                <Link to="/login" className="text-primary font-bold">
+                                    Sign In Here
+                                </Link>
+                            </div>
         </>
     )
 }
 
-export default FormSignIn;
+export default FormSignUp;
