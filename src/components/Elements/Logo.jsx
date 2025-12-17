@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const Logo = () => {
-  return (
+function Logo() {
+    return (
     <>
-        <div className="flex items-center justify-center text-4xl tracking-wide font-poppins text-primary">
+        <div className="flex justify-center items-center font-poppins tracking-wide text-primary text-4xl">
           <span className="font-bold">FINE</span>bank
           <span className="font-bold">.IO</span>
         </div>
     </>
-  )
+    );
 }
 
-export default Logo
+export default Logo;
