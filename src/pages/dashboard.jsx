@@ -9,7 +9,7 @@ import CardUpcomingBill from "../components/Fragments/CardUpcomingBill";
 import { transactions, bills, expensesBreakdowns, balances, goals, expensesStatistics } from "../data";
 
 function dashboard() {
-  console.log(transactions);
+  //console.log(transactions);
   return (
     <>
       <MainLayout>
