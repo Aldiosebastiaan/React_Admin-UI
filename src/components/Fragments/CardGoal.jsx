@@ -58,7 +58,6 @@ function CardGoal(props) {
         title="Goals"
         desc={
   Object.keys(data).length === 0 ? (
-    // Tambahkan min-h-[100px] atau h-48 untuk memastikan container punya ruang
     <div className="flex flex-col justify-center items-center h-48 text-primary">
       <CircularProgress color="inherit" size={50} />
       <span className="mt-2 text-gray-500">Loading Data</span>

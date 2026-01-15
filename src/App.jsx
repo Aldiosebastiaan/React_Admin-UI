@@ -7,6 +7,7 @@ import BalancePage from "./pages/balances";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext.jsx";
+import ExpensesPage from "./pages/expense.jsx";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -49,6 +50,15 @@ const myRouter = createBrowserRouter([
       element: (
         <RequireAuth>
           <BalancePage />
+        </RequireAuth>
+      ),
+    },
+
+    {
+      path: "/expense",
+      element: (
+        <RequireAuth>
+          <ExpensesPage />
         </RequireAuth>
       ),
     },

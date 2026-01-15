@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import MainLayout from "../components/Layouts/MainLayout";
 import CardBalance from "../components/Fragments/CardBalance";
 import CardExpenseBreakdown from "../components/Fragments/CardExpenseBreakdown";
@@ -6,82 +6,70 @@ import CardGoal from "../components/Fragments/CardGoal";
 import CardRecentTransaction from "../components/Fragments/CardRecentTransaction";
 import CardStatistic from "../components/Fragments/CardStatistic";
 import CardUpcomingBill from "../components/Fragments/CardUpcomingBill";
-import { transactions, bills, expensesBreakdowns, balances, expensesStatistics } from "../data";
-import { goalService } from "../services/dataService";
+
+import { transactions, bills, balances, expensesStatistics } from "../data";
+import { goalService, expenseService } from "../services/dataService"; 
 import { AuthContext } from "../context/authContext.jsx";
 import AppSnackbar from "../components/Elements/AppSnackbar.jsx";
 
 function Dashboard() {
-  const [goals, setGoals] = useState({}); // Diinisialisasi null untuk pengecekan data
+  const [goals, setGoals] = useState({});
+  const [breakdownData, setBreakdownData] = useState([]);
   const { logout } = useContext(AuthContext);
-
-  // State untuk AppSnackbar
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success",
-  });
-
-  const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
-  };
+  const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
 
   const fetchGoals = async () => {
     try {
       const data = await goalService();
-      setGoals(data);
+      setGoals(data || {}); 
     } catch (err) {
-      console.error("Gagal mengambil data goals:", err);
-      
-      // Tampilkan pesan error via Snackbar
-      setSnackbar({
-        open: true,
-        message: err.msg || "Gagal mengambil data goals",
-        severity: "error",
-      });
+      if (err.status === 401) logout();
+    }
+  };
 
-      if (err.status === 401) {
-        logout();
-      }
+  const fetchExpensesBreakdowns = async () => {
+    try {
+      const data = await expenseService();
+      setBreakdownData(data || []);
+    } catch (err) {
+      setBreakdownData([]);
     }
   };
 
   useEffect(() => {
     fetchGoals();
+    fetchExpensesBreakdowns();
   }, []);
 
   return (
     <>
       <MainLayout>
         <div className="grid sm:grid-cols-12 gap-6">
+          {/* BARIS ATAS: Balance, Goals, Upcoming Bill */}
+          <div className="sm:col-span-4"><CardBalance data={balances} /></div>
+          <div className="sm:col-span-4"><CardGoal data={goals} /></div>
+          <div className="sm:col-span-4"><CardUpcomingBill data={bills} /></div>
+
+          {/* BARIS BAWAH: Dibagi menjadi dua kolom besar */}
+          
+          {/* SISI KIRI: Recent Transactions (Memanjang ke bawah) */}
           <div className="sm:col-span-4">
-            <CardBalance data={balances} />
-          </div>
-          <div className="sm:col-span-4">
-            {/* Conditional rendering untuk mencegah error NaN jika data belum ada */}
-              <CardGoal data={goals} />
-          </div>
-          <div className="sm:col-span-4">
-            <CardUpcomingBill data={bills} />
-          </div>
-          <div className="sm:col-span-4 sm:row-span-2">
             <CardRecentTransaction data={transactions} />
           </div>
-          <div className="sm:col-span-8">
+
+          {/* SISI KANAN: Statistics di atas, Expenses Breakdown di bawah */}
+          <div className="sm:col-span-8 flex flex-col gap-6">
             <CardStatistic data={expensesStatistics} />
-          </div>
-          <div className="sm:col-span-8">
-            <CardExpenseBreakdown data={expensesBreakdowns} />
+            <CardExpenseBreakdown data={breakdownData} />
           </div>
         </div>
       </MainLayout>
 
-      {/* Komponen Snackbar */}
       <AppSnackbar
         open={snackbar.open}
         message={snackbar.message}
         severity={snackbar.severity}
-        onClose={handleCloseSnackbar}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
       />
     </>
   );
